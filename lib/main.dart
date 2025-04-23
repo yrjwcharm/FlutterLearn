@@ -165,7 +165,6 @@ class TitleSection extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(32),
             child: Row(
               children: [
                 const Icon(Icons.info, color: Colors.red),
