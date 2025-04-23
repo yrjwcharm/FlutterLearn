@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:myflutterproject/state_manager.dart';
 
@@ -35,15 +37,70 @@ class MyCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var data = StateManager.of(context)?.data ?? '';
+
+    //8个按钮
     return Container(
-      color: Colors.red,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(data, style: Theme.of(context).textTheme.headlineMedium),
-          ],
-        ),
+      color: Colors.white,
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextButton(
+            onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.orange),
+            ),
+            child: Text('TextButton', style: TextStyle(color: Colors.white)),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.red),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+            ),
+            child: Text('ElevatedButton'),
+          ),
+          FilledButton(
+            onPressed: () {},
+
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.black),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+            ),
+            child: Text('FilledButton'),
+          ),
+          FilledButton.tonal(
+            onPressed: () {},
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.blue),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+            ),
+            child: Text('FilledButton.tonal'),
+          ),
+
+          OutlinedButton(
+            onPressed: () {},
+
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all(Colors.yellow),
+              foregroundColor: WidgetStateProperty.all(Colors.white),
+            ),
+            child: Text('OutlinedButton'),
+          ),
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () {},
+            icon: Image.asset('web/icons/Icon-192.png', width: 45, height: 45),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              print('FloatingActionButton');
+            },
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
