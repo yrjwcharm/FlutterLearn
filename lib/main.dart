@@ -4,108 +4,69 @@ import 'package:flutter/material.dart';
 import 'package:myflutterproject/state_manager.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MaterialApp(
+      title: 'My app', // used by the OS task switcher
+      home: SafeArea(child: MyScaffold()),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyAppBar extends StatelessWidget {
+  const MyAppBar({required this.title, super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+  // Fields in a Widget subclass are always marked "final".
 
-class _MyAppState extends State<MyApp> {
+  final Widget title;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Flutter Demo Home Page')),
-        body: StateManager(data: 'Hello, World!', child: MyCounter()),
+    return Container(
+      height: 56, // in logical pixels
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(color: Colors.blue[500]),
+      // Row is a horizontal, linear layout.
+      child: Row(
+        children: [
+          const IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Navigation menu',
+            onPressed: null, // null disables the button
+          ),
+          // Expanded expands its child
+          // to fill the available space.
+          Expanded(child: title),
+          const IconButton(
+            icon: Icon(Icons.search),
+            tooltip: 'Search',
+            onPressed: null,
+          ),
+        ],
       ),
     );
   }
 }
 
-class MyCounter extends StatelessWidget {
-  const MyCounter({super.key});
+class MyScaffold extends StatelessWidget {
+  const MyScaffold({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var data = StateManager.of(context)?.data ?? '';
-
-    //8个按钮
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
+    // Material is a conceptual piece
+    // of paper on which the UI appears.
+    return Material(
+      // Column is a vertical, linear layout.
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.orange),
+          MyAppBar(
+            title: Text(
+              'Example title',
+              style:
+                  Theme.of(context) //
+                  .primaryTextTheme.titleLarge,
             ),
-            child: Text('TextButton', style: TextStyle(color: Colors.white)),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-              ),
-              backgroundColor: WidgetStateProperty.all(Colors.red),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
-            ),
-            child: Text('ElevatedButton'),
-          ),
-          FilledButton(
-            onPressed: () {},
-
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.black),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
-            ),
-            child: Text('FilledButton'),
-          ),
-          FilledButton.tonal(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
-            ),
-            child: Text('FilledButton.tonal'),
-          ),
-
-          OutlinedButton(
-            onPressed: () {},
-
-            style: ButtonStyle(
-              side: WidgetStateProperty.all(
-                const BorderSide(color: Colors.yellow, width: 2),
-              ),
-              backgroundColor: WidgetStateProperty.all(Colors.brown),
-              foregroundColor: WidgetStateProperty.all(Colors.white),
-            ),
-            child: Text('OutlinedButton'),
-          ),
-          IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () {},
-            icon: Image.asset('web/icons/Icon-192.png', width: 45, height: 45),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              print('FloatingActionButton');
-            },
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            child: const Icon(Icons.add),
-          ),
+          const Expanded(child: Center(child: Text('Hello, world!'))),
         ],
       ),
     );
