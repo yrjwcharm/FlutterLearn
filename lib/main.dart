@@ -1,74 +1,201 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:myflutterproject/state_manager.dart';
+
+class TitleSection extends StatelessWidget {
+  const TitleSection({super.key, required this.name, required this.location});
+
+  final String name;
+  final String location;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 240,
+            child: Image.asset('web/icons/Icon-192.png', fit: BoxFit.cover),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Text(
+                          name,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Text(
+                        location,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.star),
+                  color: Colors.red[500],
+                  onPressed: () {
+                    // Handle the button press
+                  },
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.phone, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Phone: +41 123 456 789',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.web, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Website: www.example.com',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.access_time, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Open: 9 AM - 5 PM',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.directions, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Directions: 123 Main St, Kandersteg',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.accessibility, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Accessibility: Wheelchair accessible',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.pets, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Pets: Allowed',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.local_parking, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Parking: Available',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.restaurant, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Restaurant: On-site',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.local_activity, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Activities: Hiking, Swimming',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(32),
+            child: Row(
+              children: [
+                const Icon(Icons.info, color: Colors.red),
+                const SizedBox(width: 8),
+                Text(
+                  'Info: Open year-round',
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 void main() {
   runApp(
-    const MaterialApp(
-      title: 'My app', // used by the OS task switcher
-      home: SafeArea(child: MyScaffold()),
+    MaterialApp(
+      title: 'Flutter Layout Demo',
+      home: Scaffold(
+        appBar: AppBar(title: Text('Flutter Layout Demo')),
+        body: const Center(
+          child: TitleSection(
+            name: 'Oeschinen Lake Campground',
+            location: 'Kandersteg, Switzerland',
+          ),
+        ),
+      ),
     ),
   );
-}
-
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({required this.title, super.key});
-
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 56, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        children: [
-          const IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: null, // null disables the button
-          ),
-          // Expanded expands its child
-          // to fill the available space.
-          Expanded(child: title),
-          const IconButton(
-            icon: Icon(Icons.search),
-            tooltip: 'Search',
-            onPressed: null,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Material is a conceptual piece
-    // of paper on which the UI appears.
-    return Material(
-      // Column is a vertical, linear layout.
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Example title',
-              style:
-                  Theme.of(context) //
-                  .primaryTextTheme.titleLarge,
-            ),
-          ),
-          const Expanded(child: Center(child: Text('Hello, world!'))),
-        ],
-      ),
-    );
-  }
 }
