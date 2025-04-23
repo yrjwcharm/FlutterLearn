@@ -55,6 +55,9 @@ class MyCounter extends StatelessWidget {
           ElevatedButton(
             onPressed: () {},
             style: ButtonStyle(
+              shape: WidgetStateProperty.all(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              ),
               backgroundColor: WidgetStateProperty.all(Colors.red),
               foregroundColor: WidgetStateProperty.all(Colors.white),
             ),
@@ -82,7 +85,10 @@ class MyCounter extends StatelessWidget {
             onPressed: () {},
 
             style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.yellow),
+              side: WidgetStateProperty.all(
+                const BorderSide(color: Colors.yellow, width: 2),
+              ),
+              backgroundColor: WidgetStateProperty.all(Colors.brown),
               foregroundColor: WidgetStateProperty.all(Colors.white),
             ),
             child: Text('OutlinedButton'),
