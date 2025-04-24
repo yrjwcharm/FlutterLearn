@@ -17,11 +17,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Text(
-          'Hello, Flutter!',
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
+      body: Column(
+        children: [
+          Text('测试主题', style: Theme.of(context).textTheme.titleLarge),
+          Theme(
+            data: ThemeData(
+              textTheme: Theme.of(context).textTheme.copyWith(
+                titleLarge: const TextStyle(
+                  fontSize: 30,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            child: Text(
+              '测试覆盖主题',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+        ],
       ),
     );
   }
