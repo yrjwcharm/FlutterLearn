@@ -19,28 +19,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: Text(title)),
       body: Column(
         children: [
-          Text('测试主题', style: Theme.of(context).textTheme.titleLarge),
-          Container(
-            color: Colors.red,
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Text('测试主题', style: Theme.of(context).textTheme.titleLarge),
-          ),
-          Theme(
-            data: ThemeData(
-              textTheme: Theme.of(context).textTheme.copyWith(
-                titleLarge: const TextStyle(
-                  fontSize: 30,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.red,
-                ),
-              ),
-            ),
-            child: Builder(
-              builder:
-                  (context) => Text(
-                    '测试主题',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+          Text(
+            '我是中国人',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 20,
+              fontStyle: FontStyle.normal,
             ),
           ),
         ],
