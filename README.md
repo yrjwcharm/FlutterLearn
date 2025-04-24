@@ -76,3 +76,4 @@ Widget build(BuildContext context) {
 
 #### ​4. 哪些组件隐式使用了 Builder？​​
 许多 Flutter 内置组件（如 ListView.builder、FutureBuilder、StreamBuilder）内部已经通过 Builder 管理上下文，开发者无需手动处理。
+![alt text](image-5.png)
