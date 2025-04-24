@@ -30,9 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            child: Text(
-              '测试覆盖主题',
-              style: Theme.of(context).textTheme.titleLarge,
+            child: Builder(
+              builder:
+                  (context) => Text(
+                    '测试主题',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
             ),
           ),
         ],
