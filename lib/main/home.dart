@@ -20,6 +20,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Text('测试主题', style: Theme.of(context).textTheme.titleLarge),
+          Container(
+            color: Colors.red,
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Text('测试主题', style: Theme.of(context).textTheme.titleLarge),
+          ),
           Theme(
             data: ThemeData(
               textTheme: Theme.of(context).textTheme.copyWith(
