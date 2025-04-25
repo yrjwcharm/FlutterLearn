@@ -23,41 +23,21 @@ class MyApp extends StatelessWidget {
         ),
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-          displayLarge: const TextStyle(
-            fontSize: 72,
-            fontWeight: FontWeight.bold,
-          ),
-          // ···
-          titleLarge: GoogleFonts.oswald(
-            fontSize: 30,
-            fontStyle: FontStyle.italic,
-          ),
-          bodyMedium: GoogleFonts.merriweather(),
-          displaySmall: GoogleFonts.pacifico(),
-        ),
+        // textTheme: TextTheme(
+        //   displayLarge: const TextStyle(
+        //     fontSize: 72,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        //   // ···
+        //   titleLarge: GoogleFonts.oswald(
+        //     fontSize: 30,
+        //     fontStyle: FontStyle.italic,
+        //   ),
+        //   bodyMedium: GoogleFonts.merriweather(),
+        //   displaySmall: GoogleFonts.pacifico(),
+        // ),
       ),
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
-              ],
-            ),
-          ),
-          body: const TabBarView(
-            children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
-            ],
-          ),
-        ),
-      ),
+      home: const MyHomePage(title: '测试标题'),
     );
   }
 }
