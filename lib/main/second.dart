@@ -13,10 +13,10 @@ class DetailScreen extends StatelessWidget {
     // Use the Todo to create the UI.
     Todo todo = ModalRoute.of(context)!.settings.arguments as Todo;
     return Scaffold(
-      appBar: AppBar(title: Text(todo.title ?? 'No Title')),
+      appBar: AppBar(title: Text(todo.title)),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Text(todo.description ?? ''),
+        child: Text(todo.description),
       ),
     );
   }
