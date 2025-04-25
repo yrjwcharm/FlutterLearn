@@ -11,12 +11,21 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Use the Todo to create the UI.
-    Todo todo = ModalRoute.of(context)!.settings.arguments as Todo;
+    // final todo = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
-      appBar: AppBar(title: Text(todo.title)),
+      appBar: AppBar(title: Text('第二个屏幕')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Text(todo.description),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, '返回的参数');
+              },
+              child: Text('测试点击'),
+            ),
+          ],
+        ),
       ),
     );
   }
