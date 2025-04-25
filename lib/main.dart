@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         //   displaySmall: GoogleFonts.pacifico(),
         // ),
       ),
-      home: const MyHomePage(title: '测试标题'),
+      home: MyHomePage(),
     );
   }
 }

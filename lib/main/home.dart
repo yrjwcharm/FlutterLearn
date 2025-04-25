@@ -1,37 +1,30 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myflutterproject/main/second.dart';
+import 'package:myflutterproject/modal/Todo.dart';
 
 class MyHomePage extends StatefulWidget {
-  final String title;
+  final todos = List.generate(
+    20,
+    (i) =>
+        Todo('Todo $i', 'A description of what needs to be done for Todo $i'),
+  );
 
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState(title);
+  State<MyHomePage> createState() => _MyHomePageState(todos: todos);
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final String title;
-  final myController = TextEditingController();
+  // Requiring the list of todos.
 
-  _MyHomePageState(this.title);
+  final List<Todo> todos;
+
+  _MyHomePageState({required this.todos});
   @override
   void initState() {
     super.initState();
-    loadAsset()
-        .then((value) {
-          // 解析 JSON 数据
-          Map<String, dynamic> jsonData = jsonDecode(value);
-          print(
-            jsonData['name'], // 输出: John Doe
-          );
-        })
-        .catchError((error) {
-          print(error);
-        });
   }
 
   Future<String> loadAsset() async {
@@ -40,28 +33,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    myController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Column(
-        children: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SecondRoute()),
-                );
-              },
-              child: Text('打开路由'),
-            ),
-          ),
-        ],
+      appBar: AppBar(title: const Text('测试标题')),
+      body: ListView.builder(
+        itemCount: todos.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(todos[index].title),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  // builder: (context) => DetailScreen(todo: todos[index]),
+                  builder: (context) => DetailScreen(),
+                  settings: RouteSettings(arguments: todos[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
