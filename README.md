@@ -33,14 +33,14 @@ class Book {
 
 // 定义 Flutter 调用原生方法的接口
 @HostApi()
-interface BookApi {
+abstract class BookApi {
   List<Book> getBooks();
   void addBook(Book book);
 }
 
 // 定义原生平台发送事件到 Flutter 的接口（可选）
 @FlutterApi()
-interface BookEvent {
+abstract class BookEvent {
   void onBookAdded(Book book);
 }
 ```
@@ -117,3 +117,7 @@ void main() {
 **2.​​代码更新**​​：修改接口文件后需重新运行生成命令。
 **​3.​空安全​**​：使用 ? 标记可空类型，确保与原生类型匹配。
 通过 Pigeon，你可以更高效、安全地实现 Flutter 与原生平台之间的复杂交互，尤其适合需要频繁通信或传递复杂数据结构的场景。
+
+```bash
+  pigeon_generate: "dart run pigeon --input pigeons/message.dart --dart_out lib/pigeons/.dart --objc_header_out ios/Runner/PigeonApi.h --objc_source_out ios/Runner/PigeonApi.mm --kotlin_out android/src/main/kotlin/com/example/myflutterproject/PigeonApi.java --kotlin_package com.example.myflutterproject"
+```
