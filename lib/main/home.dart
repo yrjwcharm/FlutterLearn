@@ -4,50 +4,18 @@ import 'package:myflutterproject/main/second.dart';
 import 'package:myflutterproject/modal/Todo.dart';
 
 class MyHomePage extends StatefulWidget {
-  final todos = List.generate(
-    20,
-    (i) =>
-        Todo('Todo $i', 'A description of what needs to be done for Todo $i'),
-  );
-
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState(todos: todos);
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Requiring the list of todos.
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List<Todo> todos;
-
-  _MyHomePageState({required this.todos});
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<String> loadAsset() async {
-    return await rootBundle.loadString('assets/config.json');
-  }
-
-  Future<void> _navigateAndDisplaySelection(BuildContext context) async {
-    // Navigator.push returns a Future that completes after calling
-    // Navigator.pop on the Selection Screen.
-    final result = await Navigator.push(
-      context,
-      // Create the SelectionScreen in the next step.
-      MaterialPageRoute(builder: (context) => const DetailScreen()),
-    );
-    // When a BuildContext is used from a StatefulWidget, the mounted property
-    // must be checked after an asynchronous gap.
-    if (!context.mounted) return;
-
-    // After the Selection Screen returns a result, hide any previous snackbars
-    // and show the new result.
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('$result')));
   }
 
   @override
@@ -58,35 +26,49 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('测试标题')),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              _navigateAndDisplaySelection(context);
-            },
-            child: Text('按钮'),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: todos.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(todos[index].title),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        // builder: (context) => DetailScreen(todo: todos[index]),
-                        builder: (context) => DetailScreen(),
-                        settings: RouteSettings(arguments: todos[index]),
-                      ),
-                    );
-                  },
-                );
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: const Text('测试标题'),
+        // leading: Builder(
+        //   builder: (BuildContext context) {
+        //     return IconButton(
+        //       icon: const Icon(Icons.menu),
+        //       onPressed: () {
+        //         // Handle back button press
+        //         Scaffold.of(context).openDrawer();
+        //         // 通过 key 访问 Scaffold
+        //       },
+        //     );
+        //   },
+        // ),
+        leading: IconButton(
+          onPressed: () {
+            _scaffoldKey.currentState!.openDrawer();
+          },
+          icon: Icon(Icons.menu),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
               },
             ),
-          ),
+          ],
+        ),
+      ),
+      body: Column(children: [
+          
         ],
       ),
     );
