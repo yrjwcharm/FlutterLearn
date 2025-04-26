@@ -125,3 +125,30 @@ void main() {
 ```bash
   pigeon_generate: "dart run pigeon --input pigeons/message.dart --dart_out lib/pigeons/message.dart --swift_out ios/Runner/PigeonApi.swift --kotlin_out android/app/src/main/kotlin/com/example/myflutterproject/PigeonApi.kt --kotlin_package com.example.myflutterproject"
 ```
+#### Flutter 端调用原生方法
+
+```dart
+// 导入生成的Pigeon文件
+import 'pigeon.dart';
+
+// 创建API实例并调用方法
+Future<void> loadNativeData() async {
+  try {
+    // 获取FlutterToNative的实例
+    final FlutterToNative api = FlutterToNative();
+    // 调用原生方法（异步）
+    NativeBean result = await api.loadNativeInfo(123);
+    print('原生返回数据: ID=${result.id}, Name=${result.name}');
+  } catch (e) {
+    print('调用失败: $e');
+  }
+}
+
+// 在Widget中调用
+ElevatedButton(
+  onPressed: () => loadNativeData(),
+  child: Text('从原生获取数据'),
+),
+```
+
+#### 3. 原生端必须实现接口

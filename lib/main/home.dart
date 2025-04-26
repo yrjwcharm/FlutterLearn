@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myflutterproject/main/second.dart';
 import 'package:myflutterproject/modal/Todo.dart';
+import 'package:myflutterproject/pigeons/message.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -38,6 +39,19 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // 创建API实例并调用方法
+  Future<void> _loadNativeData() async {
+    try {
+      // 获取FlutterToNative的实例
+      final FlutterToNative api = FlutterToNative();
+      // 调用原生方法（异步）
+      NativeBean result = await api.loadNativeInfo(123);
+      print('原生返回数据: ID=${result.id}, Name=${result.name}');
+    } catch (e) {
+      print('调用失败: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +86,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
+          ElevatedButton(
+            onPressed: () {
+              _loadNativeData();
+            },
+            child: Text('Pigeon测试 Flutter调用原生方法'),
+          ),
           ElevatedButton(
             onPressed: _getBatteryLevel,
             child: const Text('Get Battery Level'),

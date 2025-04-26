@@ -21,6 +21,7 @@ import UIKit
                 result(FlutterMethodNotImplemented)
             }
         }
+      FlutterToNativeSetup.setUp(binaryMessenger: controller.binaryMessenger, api: self);
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
