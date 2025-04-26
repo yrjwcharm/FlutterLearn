@@ -2,7 +2,11 @@ import Flutter
 import UIKit
 
 @main
-@objc class AppDelegate: FlutterAppDelegate {
+@objc class AppDelegate: FlutterAppDelegate,FlutterToNative{
+    func loadNativeInfo(id: Int64) throws -> NativeBean {
+        let nativeBean = NativeBean(id: 0, name: "测试 ");
+        return nativeBean
+    }
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
