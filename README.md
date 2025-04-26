@@ -119,5 +119,5 @@ void main() {
 通过 Pigeon，你可以更高效、安全地实现 Flutter 与原生平台之间的复杂交互，尤其适合需要频繁通信或传递复杂数据结构的场景。
 
 ```bash
-  pigeon_generate: "dart run pigeon --input pigeons/message.dart --dart_out lib/pigeons/message.dart --objc_header_out ios/Runner/PigeonApi.h --objc_source_out ios/Runner/PigeonApi.mm --kotlin_out android/app/src/main/kotlin/com/example/myflutterproject/PigeonApi.kt --kotlin_package com.example.myflutterproject"
+  pigeon_generate: "dart run pigeon --input pigeons/message.dart --dart_out lib/pigeons/message.dart --swift_out ios/Runner/PigeonApi.swift --objc_header_out ios/Runner/PigeonApi.h --objc_source_out ios/Runner/PigeonApi.mm --kotlin_out android/app/src/main/kotlin/com/example/myflutterproject/PigeonApi.kt --kotlin_package com.example.myflutterproject"
 ```
